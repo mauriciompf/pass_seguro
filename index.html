@@ -5,7 +5,84 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/index.css" />
-    <title>Pass Seguro</title>
+    <title>Pass Seguro: Strong Password Generator</title>
   </head>
-  <body></body>
+  <body>
+    <main class="grid place-items-center h-screen">
+      <div
+        class="shadow-2xl border-4 border-black bg-rose-400 text-white p-10 pb-5 rounded-3xl"
+      >
+        <!-- Filter Options -->
+        <div class="max-w-[300px]">
+          <!-- Length Range -->
+          <label for="range" class="relative">
+            <span
+              class="rangeValue absolute -top-5 font-bold bg-rose-500 size-5 grid place-items-center text-sm rounded-full"
+              >2</span
+            >
+            <input
+              id="range"
+              type="range"
+              max="12"
+              min="4"
+              class="cursor-pointer w-full mb-8 h-2 bg-red-200 accent-rose-500 rounded-lg"
+            />
+          </label>
+
+          <!-- Filters -->
+          <div class="flex flex-wrap gap-x-3 place-items-center gap-y-2">
+            <button
+              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-100 bg-red-200 text-black rounded-sm"
+            >
+              Numbers (0-9)
+            </button>
+            <button
+              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+            >
+              Letters (A-Z, a-z)
+            </button>
+            <!-- <button
+              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+            >
+              Lowercase
+            </button>
+            <button
+              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+            >
+              Uppercase
+            </button> -->
+            <button
+              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+            >
+              Symbols (!, @, #, etc)
+            </button>
+            <button
+              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+            >
+              All
+            </button>
+          </div>
+        </div>
+
+        <!-- Generate password -->
+        <div>
+          <button
+            class="mt-5 p-2 w-full cursor-pointer bg-rose-500 font-bold rounded-sm"
+          >
+            Generate a new password
+          </button>
+
+          <!-- Password Display -->
+          <div class="mt-4">
+            <button
+              class="select-none cursor-default w-full border-2 border-rose-600 h-10 rounded-2xl italic"
+            >
+              ~ Password ~
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script src="src/main.ts"></script>
 </html>

@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@layer {
+  :root {
+    /* color-scheme: dark light; */
+  }
+
+  main {
+    background: #193cb8;
+    background: linear-gradient(
+      203deg,
+      rgba(25, 60, 184, 1) 0%,
+      rgba(61, 50, 66, 1) 98%
+    );
+  }
+}
