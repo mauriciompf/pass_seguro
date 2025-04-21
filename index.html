@@ -18,7 +18,7 @@
           <label for="range" class="relative">
             <span
               class="select-none rangeValue absolute -top-5 font-bold bg-rose-500 size-5 grid place-items-center text-sm rounded-full"
-              >2</span
+              >4</span
             >
             <input
               id="range"
@@ -39,20 +39,21 @@
               Numbers (0-9)
             </button>
             <button
-              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+              class="text-left cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
             >
               Letters (A-Z, a-z)
+
+              <div class="grid hidden">
+                <label class="cursor-pointer flex items-center gap-2">
+                  <input class="accent-rose-500" type="checkbox" />
+                  Uppercase</label
+                >
+                <label class="cursor-pointer flex items-center gap-2">
+                  <input class="accent-rose-500" type="checkbox" />
+                  Lowercase</label
+                >
+              </div>
             </button>
-            <!-- <button
-              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
-            >
-              Lowercase
-            </button>
-            <button
-              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
-            >
-              Uppercase
-            </button> -->
             <button
               class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
             >
@@ -69,7 +70,7 @@
         <!-- Generate password -->
         <div>
           <button
-            class="mt-5 p-2 w-full cursor-pointer bg-rose-500 font-bold rounded-sm"
+            class="generatePasswordBtn mt-5 p-2 w-full cursor-pointer bg-rose-500 font-bold rounded-sm"
           >
             Generate a new password
           </button>
@@ -77,7 +78,7 @@
           <!-- Password Display -->
           <div class="mt-4">
             <button
-              class="select-none cursor-default w-full border-2 border-rose-600 h-10 rounded-2xl italic"
+              class="passwordBtn select-none cursor-default w-full border-2 border-rose-600 h-10 rounded-2xl italic"
             >
               ~ Password ~
             </button>
