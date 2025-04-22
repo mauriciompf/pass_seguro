@@ -2,10 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💢</text></svg>"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/index.css" />
-    <title>Pass Seguro: Strong Password Generator</title>
+
+    <title>PassSeguro: Strong Password Generator</title>
   </head>
   <body>
     <main class="grid place-items-center h-screen">
@@ -34,33 +38,36 @@
           <!-- Filters -->
           <div class="flex flex-wrap gap-x-3 place-items-center gap-y-2">
             <button
-              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-100 bg-red-200 text-black rounded-sm"
+              class="numberFilter cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-100 bg-red-200 text-black rounded-sm"
             >
               Numbers (0-9)
             </button>
             <button
-              class="text-left cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+              class="LetterFilter text-left cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 bg-red-200 text-black rounded-sm"
             >
               Letters (A-Z, a-z)
 
               <div class="grid hidden">
                 <label class="cursor-pointer flex items-center gap-2">
-                  <input class="accent-rose-500" type="checkbox" />
+                  <input
+                    class="uppercaseFilter accent-rose-500"
+                    type="checkbox"
+                  />
                   Uppercase</label
                 >
                 <label class="cursor-pointer flex items-center gap-2">
-                  <input class="accent-rose-500" type="checkbox" />
+                  <input class="lowerFilter accent-rose-500" type="checkbox" />
                   Lowercase</label
                 >
               </div>
             </button>
             <button
-              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+              class="symbolFilter cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 bg-red-200 text-black rounded-sm"
             >
               Symbols (!, @, #, etc)
             </button>
             <button
-              class="cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 focus:opacity-100 bg-red-200 text-black rounded-sm"
+              class="llFilter cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 bg-red-200 text-black rounded-sm"
             >
               All
             </button>
