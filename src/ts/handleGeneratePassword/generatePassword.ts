@@ -39,8 +39,11 @@ const generatePassword = (limit: number, passwordButton: HTMLButtonElement) => {
   const numbers = [];
   const symbols = [];
 
-  for (let i = 0; i <= limit; i++) {
+  for (let i = 0; i < 9; i++) {
     numbers.push(getRandom(9));
+  }
+
+  for (let i = 0; i < keyboardSymbols.length - 1; i++) {
     symbols.push(keyboardSymbols[getRandom(keyboardSymbols.length)]);
   }
 
@@ -59,7 +62,7 @@ const generatePassword = (limit: number, passwordButton: HTMLButtonElement) => {
     }
   }
 
-  passwordButton.textContent = password.join("");
+  passwordButton.textContent = password.slice(0, limit).join("");
 };
 
 export default generatePassword;
