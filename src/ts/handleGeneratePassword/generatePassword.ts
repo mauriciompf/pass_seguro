@@ -1,3 +1,4 @@
+import { getFilters } from "../../main";
 import getRandom from "../utils/getRandom";
 
 const keyboardSymbols = [
@@ -34,23 +35,75 @@ const keyboardSymbols = [
   "?",
   "/",
 ];
+
+const lowercaseLetters = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+  "ç",
+];
+
+const uppercaseLetters = lowercaseLetters.map((letters) =>
+  letters.toUpperCase()
+);
+
 const generatePassword = (limit: number, passwordButton: HTMLButtonElement) => {
-  const password = [];
-  const numbers = [];
-  const symbols = [];
+  const password: string[] = [];
+  const numbers: number[] = [];
+  const symbols: string[] = [];
+  const letters: string[] = [];
 
-  for (let i = 0; i < 9; i++) {
-    numbers.push(getRandom(9));
+  const filters = (filter: string) => {
+    switch (filter) {
+      case "numbers":
+        for (let i = 0; i < 10; i++) {
+          numbers.push(getRandom(9));
+        }
+        break;
+      case "symbols":
+        for (let i = 0; i < 10; i++) {
+          symbols.push(keyboardSymbols[getRandom(keyboardSymbols.length)]);
+        }
+        break;
+      case "letters":
+        for (let i = 0; i < 10; i++) {
+          const concatLetters = lowercaseLetters.concat(uppercaseLetters);
+          letters.push(concatLetters[getRandom(concatLetters.length)]);
+        }
+    }
+  };
+
+  for (let i = 0; i <= getFilters().length - 1; i++) {
+    filters(getFilters()[i]);
   }
 
-  for (let i = 0; i < keyboardSymbols.length - 1; i++) {
-    symbols.push(keyboardSymbols[getRandom(keyboardSymbols.length)]);
-  }
+  const concatPass = numbers.map(String).concat(symbols, letters);
 
-  const concat = numbers.map(String).concat(symbols);
-
-  for (let i = 0; i < concat.length - 1; i++) {
-    password.push(concat[getRandom(concat.length)]);
+  for (let i = 0; i < concatPass.length - 1; i++) {
+    password.push(concatPass[getRandom(concatPass.length)]);
 
     // Sequencial repetive element
     if (password[i] === password[i - 1]) {
@@ -58,11 +111,12 @@ const generatePassword = (limit: number, passwordButton: HTMLButtonElement) => {
       const index = password.indexOf(password[i]);
 
       // Replace element to a random element
-      if (index !== -1) password[i] = concat[getRandom(concat.length)];
+      if (index !== -1) password[i] = concatPass[getRandom(concatPass.length)];
     }
   }
 
   passwordButton.textContent = password.slice(0, limit).join("");
+  // console.log(password.slice(0, limit).join(""))
 };
 
 export default generatePassword;
