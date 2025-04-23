@@ -71,6 +71,8 @@ const uppercaseLetters = lowercaseLetters.map((letters) =>
 );
 
 const generatePassword = (limit: number, passwordButton: HTMLButtonElement) => {
+  // console.log(getFilters());
+
   const password: string[] = [];
   const numbers: number[] = [];
   const symbols: string[] = [];
@@ -88,11 +90,16 @@ const generatePassword = (limit: number, passwordButton: HTMLButtonElement) => {
           symbols.push(keyboardSymbols[getRandom(keyboardSymbols.length)]);
         }
         break;
-      case "letters":
+      case "uppercase":
         for (let i = 0; i < 10; i++) {
-          const concatLetters = lowercaseLetters.concat(uppercaseLetters);
-          letters.push(concatLetters[getRandom(concatLetters.length)]);
+          letters.push(uppercaseLetters[getRandom(uppercaseLetters.length)]);
         }
+        break;
+      case "lowercase":
+        for (let i = 0; i < 10; i++) {
+          letters.push(lowercaseLetters[getRandom(lowercaseLetters.length)]);
+        }
+        break;
     }
   };
 

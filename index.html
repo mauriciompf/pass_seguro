@@ -43,20 +43,25 @@
               Numbers (0-9)
             </button>
             <button
-              class="LetterFilter text-left cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 bg-red-200 text-black rounded-sm"
+              class="letterFilter text-left cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 bg-red-200 text-black rounded-sm"
             >
               Letters (A-Z, a-z)
 
-              <div class="grid hidden">
+              <div class="showCase hidden">
                 <label class="cursor-pointer flex items-center gap-2">
                   <input
-                    class="uppercaseFilter accent-rose-500"
+                    class="upperCaseFilter cursor-default accent-rose-500"
                     type="checkbox"
+                    checked="true"
                   />
                   Uppercase</label
                 >
                 <label class="cursor-pointer flex items-center gap-2">
-                  <input class="lowerFilter accent-rose-500" type="checkbox" />
+                  <input
+                    checked="true"
+                    class="lowerCaseFilter cursor-default accent-rose-500"
+                    type="checkbox"
+                  />
                   Lowercase</label
                 >
               </div>
@@ -67,7 +72,7 @@
               Symbols (!, @, #, etc)
             </button>
             <button
-              class="llFilter cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 bg-red-200 text-black rounded-sm"
+              class="allFilter cursor-pointer shadow-2xl p-2 w-fit font-bold opacity-50 hover:opacity-100 bg-red-200 text-black rounded-sm"
             >
               All
             </button>
