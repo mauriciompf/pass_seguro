@@ -1,7 +1,7 @@
 import generatePassword from "./ts/handleGeneratePassword/generatePassword";
 import handleRangeInput from "./ts/handleRangeInput/handleRangeInput";
 
-type Filters = "numbers" | "symbols" | "uppercase" | "lowercase" | "letters";
+type Filters = "numbers" | "symbols" | "uppercase" | "lowercase";
 
 const rangeInput = document.querySelector("#range") as HTMLInputElement;
 const rangeReference = document.querySelector(".rangeValue") as HTMLSpanElement;
@@ -41,44 +41,32 @@ let filters: string[] = [];
 rangeInput.onchange = (e) => handleRangeInput(e, rangeReference);
 rangeInput.onmousemove = (e) => handleRangeInput(e, rangeReference);
 
-window.addEventListener("DOMContentLoaded", () => {
-  setFilters("numbers");
-});
+window.addEventListener("DOMContentLoaded", () => setFilters("numbers"));
 
-generatePasswordButton.onclick = () => {
+const removeElementArrayFilter = (filterName: Filters) =>
+  getFilters().splice(filters.indexOf(filterName), 1);
+
+generatePasswordButton.onclick = () =>
   generatePassword(Number(rangeInput.value), passwordButton);
-};
 
-numberFilterButton.onclick = () => {
-  // TODO don't toggle if filters is empty
-  numberFilterButton.classList.toggle("opacity-50");
+const toggleFilter = (btn: HTMLButtonElement, filterName: Filters) => {
+  btn.classList.toggle("opacity-50");
 
-  if (!getFilters().includes("numbers")) {
-    setFilters("numbers");
-  }
-
-  if (numberFilterButton.classList.contains("opacity-50")) {
-    getFilters().splice(filters.indexOf("numbres"), 1);
+  if (getFilters().includes(filterName)) {
+    removeElementArrayFilter(filterName);
+  } else {
+    setFilters(filterName);
   }
 };
 
-symbolFilterButton.onclick = () => {
-  symbolFilterButton.classList.toggle("opacity-50");
-
-  if (!getFilters().includes("symbols")) {
-    setFilters("symbols");
-  }
-
-  if (symbolFilterButton.classList.contains("opacity-50")) {
-    getFilters().splice(filters.indexOf("symbols"), 1);
-  }
-};
-
-letterFilterButton.onclick = () => {
-  letterFilterButton.classList.toggle("opacity-50");
-
+const toggleLettersFilter = () => {
   showCase.classList.toggle("hidden");
   showCase.classList.toggle("grid");
+
+  toggleFilter(letterFilterButton, "lowercase");
+  toggleFilter(letterFilterButton, "uppercase");
+
+  letterFilterButton.classList.toggle("opacity-50");
 
   if (
     !getFilters().includes("uppercase") &&
@@ -88,25 +76,22 @@ letterFilterButton.onclick = () => {
     setFilters("lowercase");
   }
 
-  if (!lowerCaseInput.checked) {
-    getFilters().splice(filters.indexOf("lowercase"), 1);
-  }
-
-  if (!upperCaseInput.checked) {
-    getFilters().splice(filters.indexOf("uppercase"), 1);
-  }
+  if (!lowerCaseInput.checked) removeElementArrayFilter("lowercase");
+  if (!upperCaseInput.checked) removeElementArrayFilter("uppercase");
 
   if (letterFilterButton.classList.contains("opacity-50")) {
-    getFilters().splice(filters.indexOf("uppercase"), 1);
-    getFilters().splice(filters.indexOf("lowercase"), 1);
+    // Default checked
+    upperCaseInput.checked = true;
+    lowerCaseInput.checked = true;
 
-    if (!getFilters().includes("numbers")) {
-      setFilters("numbers");
-    }
+    removeElementArrayFilter("lowercase");
+    removeElementArrayFilter("uppercase");
+
+    if (!getFilters().includes("numbers")) setFilters("numbers");
   }
 };
 
-allFilterButton.onclick = () => {
+const toggleAllFilters = (...filtersButton: HTMLButtonElement[]) => {
   const allFilters: Filters[] = [
     "numbers",
     "symbols",
@@ -114,45 +99,50 @@ allFilterButton.onclick = () => {
     "lowercase",
   ];
 
+  const elementsFilters = [...filtersButton];
+
   allFilterButton.classList.toggle("opacity-50");
 
   for (let i = 0; i < allFilters.length; i++) {
+    // Add all filters
     if (!getFilters().includes(allFilters[i])) {
-      setFilters(allFilters[i]);
+      setFilters(allFilters[i]); // Add all the filters
+
+      elementsFilters.forEach((element) =>
+        element.classList.remove("opacity-50")
+      );
+    } else if (allFilters[i] !== "numbers") {
+      removeElementArrayFilter(allFilters[i]);
     }
 
-    if (numberFilterButton.classList.contains("opacity-50")) {
-      numberFilterButton.classList.remove("opacity-50");
-      getFilters().splice(filters.indexOf("numbers"), 1);
-    }
-
-    if (symbolFilterButton.classList.contains("opacity-50")) {
-      symbolFilterButton.classList.remove("opacity-50");
-      getFilters().splice(filters.indexOf("symbols"), 1);
-    }
-
+    // Show letter options
     if (letterFilterButton.classList.contains("opacity-50")) {
-      letterFilterButton.classList.remove("opacity-50");
+      lowerCaseInput.checked = true;
+      upperCaseInput.checked = true;
+
       showCase.classList.remove("hidden");
       showCase.classList.add("grid");
-
-      getFilters().splice(filters.indexOf("uppercase"), 1);
-      getFilters().splice(filters.indexOf("lowercase"), 1);
-
-      if (!getFilters().includes("numbers")) {
-        setFilters("numbers");
-      }
     }
 
+    // Remove all filters
     if (allFilterButton.classList.contains("opacity-50")) {
+      // Hide letter options
       showCase.classList.add("hidden");
       showCase.classList.remove("grid");
 
-      symbolFilterButton.classList.add("opacity-50");
-      letterFilterButton.classList.add("opacity-50");
+      elementsFilters.forEach(
+        (element) =>
+          element !== numberFilterButton && element.classList.add("opacity-50")
+      );
     }
   }
 };
+
+numberFilterButton.onclick = () => toggleFilter(numberFilterButton, "numbers");
+symbolFilterButton.onclick = () => toggleFilter(symbolFilterButton, "symbols");
+letterFilterButton.onclick = () => toggleLettersFilter();
+allFilterButton.onclick = () =>
+  toggleAllFilters(numberFilterButton, symbolFilterButton, letterFilterButton);
 
 export function setFilters(filter: Filters) {
   return filters.push(filter);

@@ -71,7 +71,7 @@ const uppercaseLetters = lowercaseLetters.map((letters) =>
 );
 
 const generatePassword = (limit: number, passwordButton: HTMLButtonElement) => {
-  // console.log(getFilters());
+  console.log("filters:", getFilters());
 
   const password: string[] = [];
   const numbers: number[] = [];
