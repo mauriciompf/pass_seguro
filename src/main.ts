@@ -41,15 +41,22 @@ let filters: string[] = [];
 rangeInput.onchange = (e) => handleRangeInput(e, rangeReference);
 rangeInput.onmousemove = (e) => handleRangeInput(e, rangeReference);
 
-window.addEventListener("DOMContentLoaded", () => setFilters("numbers"));
+setFilters("numbers");
 
 const removeElementArrayFilter = (filterName: Filters) =>
-  getFilters().splice(filters.indexOf(filterName), 1);
+  getFilters().splice(getFilters().indexOf(filterName), 1);
 
-generatePasswordButton.onclick = () =>
+generatePasswordButton.onclick = () => {
+  if (getFilters().length === 0) {
+    toggleFilter(numberFilterButton, "numbers");
+  }
+
   generatePassword(Number(rangeInput.value), passwordButton);
+};
 
 const toggleFilter = (btn: HTMLButtonElement, filterName: Filters) => {
+  console.log(getFilters());
+
   btn.classList.toggle("opacity-50");
 
   if (getFilters().includes(filterName)) {
@@ -62,9 +69,6 @@ const toggleFilter = (btn: HTMLButtonElement, filterName: Filters) => {
 const toggleLettersFilter = () => {
   showCase.classList.toggle("hidden");
   showCase.classList.toggle("grid");
-
-  toggleFilter(letterFilterButton, "lowercase");
-  toggleFilter(letterFilterButton, "uppercase");
 
   letterFilterButton.classList.toggle("opacity-50");
 
@@ -79,15 +83,14 @@ const toggleLettersFilter = () => {
   if (!lowerCaseInput.checked) removeElementArrayFilter("lowercase");
   if (!upperCaseInput.checked) removeElementArrayFilter("uppercase");
 
-  if (letterFilterButton.classList.contains("opacity-50")) {
-    // Default checked
+  if (!upperCaseInput.checked && !lowerCaseInput.checked) {
+    letterFilterButton.classList.add("opacity-50");
+
+    showCase.classList.toggle("hidden");
+    showCase.classList.toggle("grid");
+
     upperCaseInput.checked = true;
     lowerCaseInput.checked = true;
-
-    removeElementArrayFilter("lowercase");
-    removeElementArrayFilter("uppercase");
-
-    if (!getFilters().includes("numbers")) setFilters("numbers");
   }
 };
 
@@ -151,3 +154,5 @@ export function setFilters(filter: Filters) {
 export function getFilters() {
   return filters;
 }
+
+// console.log(getFilters().length);
