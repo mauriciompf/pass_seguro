@@ -15,7 +15,6 @@ import handleRangeInput from "./ts/handleRangeInput/handleRangeInput";
 
 rangeInput.onchange = (e) => handleRangeInput(e, rangeReference);
 rangeInput.onmousemove = (e) => handleRangeInput(e, rangeReference);
-// Events Listeners
 generatePasswordButton.onclick = () =>
   generatePassword(Number(rangeInput.value));
 numberFilterButton.onclick = () => toggleFilter(numberFilterButton, "numbers");

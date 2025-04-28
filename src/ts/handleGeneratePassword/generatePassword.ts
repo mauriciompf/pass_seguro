@@ -1,9 +1,13 @@
-import { filters, letters, numbers, symbols } from "../constants/globals";
+import { filters } from "../constants/globals";
 import { numberFilterButton, passwordButton } from "../constants/htmlElements";
 import handleFilters from "../handleFilters/handleFilters";
 import getRandom from "../utils/getRandom";
 
 const generatePassword = (limit: number) => {
+  const numbers: number[] = [];
+  const symbols: string[] = [];
+  const letters: string[] = [];
+
   const password: string[] = [];
 
   // Insert default filter if filters array is empty
@@ -13,13 +17,13 @@ const generatePassword = (limit: number) => {
   }
 
   for (let i = 0; i <= filters.length - 1; i++) {
-    handleFilters(filters[i]);
+    handleFilters(filters[i], numbers, symbols, letters);
   }
 
   const concatPass = numbers.map(String).concat(symbols, letters);
 
   // Combine filters
-  for (let i = 0; i < concatPass.length - 1; i++) {
+  for (let i = 0; i <= concatPass.length - 1; i++) {
     password.push(concatPass[getRandom(concatPass.length)]);
 
     // Sequencial repetive element

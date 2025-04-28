@@ -1,11 +1,12 @@
-import { letters, numbers, symbols } from "../constants/globals";
 import keyboardSymbols from "../constants/keyboardSymbols";
 import lowerCaseLetters from "../constants/lowerCaseLetters";
 import upperCaseLetters from "../constants/upperCaseLetters";
 import getRandom from "../utils/getRandom";
 
-const handleFilters = (filter: string) => {
-  switch (filter) {
+const handleFilters = (filterArray: string, ...filters: any[]) => {
+  const [numbers, symbols, letters] = [...filters];
+
+  switch (filterArray) {
     case "numbers":
       for (let i = 0; i < 10; i++) {
         numbers.push(getRandom(9));
