@@ -3,6 +3,7 @@ import {
   generatePasswordButton,
   letterFilterButton,
   numberFilterButton,
+  passwordButton,
   rangeInput,
   rangeReference,
   symbolFilterButton,
@@ -15,8 +16,13 @@ import handleRangeInput from "./ts/handleRangeInput/handleRangeInput";
 
 rangeInput.onchange = (e) => handleRangeInput(e, rangeReference);
 rangeInput.onmousemove = (e) => handleRangeInput(e, rangeReference);
-generatePasswordButton.onclick = () =>
+generatePasswordButton.onclick = () => {
   generatePassword(Number(rangeInput.value));
+
+  // Copy password
+  passwordButton.onclick = () =>
+    navigator.clipboard.writeText(passwordButton.textContent!);
+};
 numberFilterButton.onclick = () => toggleFilter(numberFilterButton, "numbers");
 symbolFilterButton.onclick = () => toggleFilter(symbolFilterButton, "symbols");
 letterFilterButton.onclick = () => toggleLettersFilter();

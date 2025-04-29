@@ -36,6 +36,9 @@ const generatePassword = (limit: number) => {
     }
   }
 
+  passwordButton.classList.add("cursor-pointer");
+  passwordButton.classList.remove("cursor-default");
+
   const formatPassword = password.slice(0, limit);
   passwordButton.textContent = formatPassword.join("");
 };
