@@ -12,7 +12,10 @@ const updateRangeSliderPosition = (e: Event, rangeReference: HTMLElement) => {
     if (Number(value) === i) {
       const alignWithCircle = i - 5 < 0 ? 0 : i - 5;
 
-      rangeReference.style = `left: calc(${percentProgress}% - ${alignWithCircle}%)`;
+      rangeReference.setAttribute(
+        "style",
+        `left: calc(${percentProgress}% - ${alignWithCircle}%)`
+      );
     }
   }
 };
